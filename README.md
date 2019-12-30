@@ -4,8 +4,8 @@
 *organisation should create database such as customers,energy consumption,energy generation
 
 query:
-'''sql
-###Feature
+---sql
+
 create table customers(
 customer_id number,
 customer_name char(40) not null,
