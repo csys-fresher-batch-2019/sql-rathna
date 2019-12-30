@@ -4,7 +4,7 @@
 *organisation should create database such as customers,energy consumption,energy generation
 
 query:
----sql
+```sql
 
 create table customers(
 customer_id number,
@@ -29,5 +29,6 @@ periode timestamp,
 constraint powerplant_id_uq unique(powerplant_id),
 constraint periode_uk unique(periode)
 );
+```
 
 
