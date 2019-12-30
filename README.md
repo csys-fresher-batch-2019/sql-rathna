@@ -5,6 +5,7 @@
 
 query:
 '''
+###Feature
 create table customers(
 customer_id number,
 customer_name char(40) not null,
