@@ -1,6 +1,6 @@
 #web page for online certification course
 
-##Feature1
+##Features
 course information,user information,enrollment information must be maintained
 
 | user_id | user_name | email_id           | user_password |
@@ -29,7 +29,7 @@ course information,user information,enrollment information must be maintained
 
 query:
 ```sql
-#user_information table
+#Feature1 to create user_information table
 create table user_info(
 user_id number,
 username varchar2(100) not null,
@@ -40,7 +40,7 @@ constraint email_uq unique(email_id),
 constraint user_password_ck check(user_password like '%[!@#$%^&*():;][a-z][A-Z][0-9]%')
 );
 
-#course_information table
+#Feature2 to create course_information table
 create table course_info(
 course_id number,
 course_name varchar2(100) not null,
@@ -54,7 +54,7 @@ constraint course_category_ck check(course_Category in('BUSINESS','ARTS','SCIENC
 constraint price_ck check(price>=0)
 );
 
-#enrollment_information table
+#Feature3 to create enrollment_information table
 create table enrollment_info(
 course_id number not null,
 user_id number not null,
