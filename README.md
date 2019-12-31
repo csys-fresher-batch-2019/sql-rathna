@@ -40,6 +40,14 @@ constraint email_uq unique(email_id),
 constraint user_password_ck check(user_password like '%[!@#$%^&*():;][a-z][A-Z][0-9]%')
 );
 
+| user_id | user_name | email_id           | user_password |
+|---------|-----------|--------------------|---------------|
+| 201     | arjun     | arjunae@gmail.com  | Arjun@AE2     |
+| 202     | karthik   | karthikp@gmail.com | Karthik@54    |
+| 203     | anand     | anand001@gmail.com | Pass-123      |
+| 204     | farooq    | farooq@gmail.com   | paSS-321      |
+| 205     | siva      | siva@gmail.com     | SivaPass-123  |
+
 #Feature2 to create course_information table
 create table course_info(
 course_id number,
