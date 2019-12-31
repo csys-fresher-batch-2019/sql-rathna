@@ -3,7 +3,8 @@
 ##Feature1
 *course information,user information,enrollment information must be maintained
 
-###user information
+###feature
+-*user information
 | user_id | user_name | email_id           | user_password |
 |---------|-----------|--------------------|---------------|
 | 201     | arjun     | arjunae@gmail.com  | Arjun@AE2     |
