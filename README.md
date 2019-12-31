@@ -30,28 +30,36 @@
 query:
 ```sql
 
-create table customers(
-customer_id number,
-customer_name char(40) not null,
-adress varchar(60) not null,
-network_id number not null,
-constraint customer_id_pk primary key(customer_id)
+create table user_info(
+user_id number,
+username varchar2(100) not null,
+email_id varchar2(100) not null,
+user_password char(20) not null,
+constraint user_id_pk primary key(user_id),
+constraint email_uq unique(email_id),
+constraint user_password_ck check(user_password like '%[!@#$%^&*():;][a-z][A-Z][0-9]%')
 );
 
-create table energy_consumption(
-customer_id number,
-consumed_energy number not null,
-periode timestamp,
-constraint periode_uq unique(periode),
-constraint customer_id_fk foreign key(customer_id) references customers(customer_id)
+create table course_info(
+course_id number,
+course_name varchar2(100) not null,
+duration_of_course number not null,
+instructor_name varchar2(100) not null,
+course_category char(25) not null,
+price number not null,
+constraint course_id_pk primary key(course_id),
+constraint duration_of_course_ck check(duration_of_course>=4),
+constraint course_category_ck check(course_Category in('BUSINESS','ARTS','SCIENCE','ENGINEERING','MATHS')),
+constraint price_ck check(price>=0)
 );
 
-create table energy_generation(
-powerplant_id number not null,
-generated_energy number not null,
-periode timestamp,
-constraint powerplant_id_uq unique(powerplant_id),
-constraint periode_uk unique(periode)
+create table enrollment_info(
+course_id number not null,
+user_id number not null,
+enrolled_date date not null,
+ending_date date not null,
+constraint course_id_fk foreign key(course_id) references course_info(course_id),
+constraint user_id_fk foreign key(user_id) references user_info(user_id)
 );
 ```
 
