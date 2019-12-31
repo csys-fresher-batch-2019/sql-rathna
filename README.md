@@ -3,7 +3,6 @@
 ##Feature1
 *course information,user information,enrollment information must be maintained
 
-###user information
 | user_id | user_name | email_id           | user_password |
 |---------|-----------|--------------------|---------------|
 | 201     | arjun     | arjunae@gmail.com  | Arjun@AE2     |
@@ -12,7 +11,7 @@
 | 204     | farooq    | farooq@gmail.com   | paSS-321      |
 | 205     | siva      | siva@gmail.com     | SivaPass-123  |
 
-###course information
+
 |  course_id | course_category | course_name            | instructor_name | duration_of_course | price |
 |------------|-----------------|------------------------|-----------------|--------------------|-------|
 | 16140      | Business        | Methods of financing   | sai             | 6                  | 550   |
@@ -21,7 +20,7 @@
 | 16143      | Arts            | Pencil Drawing         | Stephen         | 8                  | 390   |
 | 16144      | Maths           | Multivariable Calculus | salman khan     | 18                 | 250   |
 
-###enrollment information
+
 | course_id | user_id | enrolled_date | ending_date |
 |-----------|---------|---------------|-------------|
 | 16140     | 202     | 22-12-2019    | 02-02-2020  |
