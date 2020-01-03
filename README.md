@@ -65,11 +65,11 @@ constraint status_ck check(status in(0,1))
 );
 create sequence enrollment_id_seq increment by 1 start with 201;
 
-| course_id | user_id | enrolled_date | ending_date |
-|-----------|---------|---------------|-------------|
-| 16140     | 202     | 22-12-2019    | 02-02-2020  |
-| 16140     | 203     | 08-12-2019    | 19-01-2020  |
-| 16141     | 201     | 01-12-2019    | 05-04-2020  |
+| enrollment_id | course_id | user_id | enrollment_date | ending_date | status |
+|---------------|-----------|---------|-----------------|-------------|--------|
+| 201           | 20201     | 1       | 03.01.2020      | 05.02.2020  | 1      |
+| 202           | 20204     | 5       | 24.12.2019      | 02.03.20202 | 1      |
+| 203           | 20208     | 3       | 12.11.2019      | 02.01.2020  | 0      |
 
 insert into user_info(user_id,username,email_id,user_password)
 values(user_id_seq.nextval,'karthikeyan','karthik1@gmail.com','password');
