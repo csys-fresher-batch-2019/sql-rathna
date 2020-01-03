@@ -15,7 +15,7 @@ constraint user_id_pk primary key(user_id),
 constraint email_uq unique(email_id),
 constraint user_password_ck check((length(user_password) >= 8))
 );
-create sequence user_id_seq start with 1;
+create sequence user_id_seq start with 201;
 
 | user_id | user_name | email_id           | user_password |
 |---------|-----------|--------------------|---------------|
@@ -63,13 +63,13 @@ constraint course_id_fk foreign key(course_id) references course_info(course_id)
 constraint user_id_fk foreign key(user_id) references user_info(user_id),
 constraint status_ck check(status in(0,1))
 );
-create sequence enrollment_id_seq increment by 1 start with 201;
+create sequence enrollment_id_seq increment by 1 start with 1;
 
 | enrollment_id | course_id | user_id | enrollment_date | ending_date | status |
 |---------------|-----------|---------|-----------------|-------------|--------|
-| 201           | 20201     | 1       | 03.01.2020      | 05.02.2020  | 1      |
-| 202           | 20204     | 5       | 24.12.2019      | 02.03.20202 | 1      |
-| 203           | 20208     | 3       | 12.11.2019      | 02.01.2020  | 0      |
+| 1             | 20201     | 1       | 03.01.2020      | 05.02.2020  | 1      |
+| 2             | 20204     | 5       | 24.12.2019      | 02.03.20202 | 1      |
+| 3             | 20208     | 3       | 12.11.2019      | 02.01.2020  | 0      |
 
 insert into user_info(user_id,username,email_id,user_password)
 values(user_id_seq.nextval,'karthikeyan','karthik1@gmail.com','password');
