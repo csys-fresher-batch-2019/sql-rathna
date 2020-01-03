@@ -138,22 +138,46 @@ select *from enrollment_info;
 select ci.course_name,ci.instructor_name,ci.course_category,ei.ending_date
 from course_info ci,enrollment_info ei where ci.course_id=ei.course_id and ei.user_id=6 and status=1;
 
+| course_name             | instructor_name | course_category         | ending_date |
+|-------------------------|-----------------|-------------------------|-------------|
+| Music theory            | Robin           | Arts                    | 23-04-2020  |
+| Effective communication | shrees          | Personality Development | 27-02-2020  |
+
 ---query to display number of users enrolled in a particular course
 select count(user_id) from enrollment_info where course_id=20202 and status=1;
+
+| count(user_id) |
+|----------------|
+| 2              |
 
 ---query to display completed courses by particular user
 select ci.course_name,ei.enrolled_date,ei.ending_date
 from course_info ci,enrollment_info ei
 where ci.course_id=ei.course_id and ei.user_id=2 and status=0;
 
+| course_name     | enrolled_date | ending_Date |
+|-----------------|---------------|-------------|
+| quantum physics | 02.12.2019    | 02.01.2020  |
+
 ---query to display number of enrollments active now
 select count(enrollment_id) from enrollment_info where status=1;
+
+| count(enrollment_id) |
+|----------------------|
+| 11                   |
 
 ---to limit the no_of_courses enrolled by a user
 alter table user_info
 add no_of_courses_enrolled number default 0;
 update user_info u
 set no_of_courses_enrolled = (select count(*) FROM enrollment_info where user_id = u.user_id);
+
+| user_id | user_name | email_id          | user_password | no_of_courses_enrolled |
+|---------|-----------|-------------------|---------------|------------------------|
+| 201     | karthi    | karthi1@gmail.com | Pass1234      | 2                      |
+| 202     | arjun     | arjun1@gmail.com  | Arjun@321     | 3                      |
+
+
 
 --- to enroll a course
 declare
@@ -167,6 +191,37 @@ DBMS_OUTPUT.PUT_LINE('Error-' || v_error_message);
 END IF;
 END;
 
+
+###Procedure to insert values into enrollment_info table during the process of enrollment
+create or replace PROCEDURE PR_INSERT_ENROLLMENT(
+I_user_id in number,
+I_course_id in number,
+I_error_message out varchar2)
+AS 
+v_temp number; 
+BEGIN
+v_temp := FN_calculate_no_courses(I_user_id);
+IF v_temp < 5 then
+insert into enrollment_info(enrollment_id,course_id,user_id,enrolled_date,ending_date,status)
+values(enrollment_id_seq.nextval,I_course_id,I_user_id,SYSDATE,(SYSDATE+((select duration_of_course from course_info where course_id=20201)*7)),1);
+update user_info
+set no_of_courses_enrolled=no_of_courses_enrolled+1
+where user_id = I_user_id;
+ELSE
+I_error_message:='You_cannot_enroll_more_than_5_courses';
+END IF;
+COMMIT;
+END PR_INSERT_ENROLLMENT;
+
+###Function to calculate no.of.courses enrolled by a user
+
+create or replace FUNCTION FN_CALCULATE_NO_COURSES(
+I_user_id in number)
+RETURN NUMBER AS v_co_num number :=0;
+BEGIN
+select count(*) into v_co_num from enrollment_info where user_id=I_user_id;
+  RETURN v_co_num;
+END FN_CALCULATE_NO_COURSES;
 
 select *from user_info;
 ```
